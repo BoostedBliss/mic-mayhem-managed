@@ -1,0 +1,6 @@
+{
+  "name": "Discord Audio Setup & Infallible Mic Optimizer",
+  "description": "Interactive audio diagnostics and Bluetooth HFP vs A2DP stress-tester for Discord voice across Windows 11, macOS, mobile phones, and top headphones.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
