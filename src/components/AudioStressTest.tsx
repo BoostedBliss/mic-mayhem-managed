@@ -20,6 +20,7 @@ export const AudioStressTest: React.FC = () => {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animFrameRef = useRef<number | null>(null);
+  const lastMetricsUpdateRef = useRef<number>(0);
 
   // Toggle Microphone
   const handleToggleMic = async () => {
@@ -61,10 +62,15 @@ export const AudioStressTest: React.FC = () => {
 
   // Poll metrics and render canvas
   useEffect(() => {
-    const updateLoop = () => {
+    const updateLoop = (timestamp: number) => {
       if (isMicActive) {
         const m = audioEngine.getMetrics();
-        setMetrics(m);
+
+        // Throttle React state update to ~10 times per second to reduce unnecessary re-renders
+        if (timestamp - lastMetricsUpdateRef.current > 100) {
+          setMetrics(m);
+          lastMetricsUpdateRef.current = timestamp;
+        }
 
         // Draw frequency bars
         const canvas = canvasRef.current;
