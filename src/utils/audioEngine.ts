@@ -28,6 +28,10 @@ export class AudioEngine {
     frequencyData: new Uint8Array(64)
   };
 
+  // Reusable typed arrays for getMetrics to avoid GC pressure
+  private cachedTimeDomain: Uint8Array | null = null;
+  private cachedFreqData: Uint8Array | null = null;
+
   private ensureContext(): AudioContext {
     if (!this.ctx) {
       const AudioCtxClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -99,11 +103,18 @@ export class AudioEngine {
     }
 
     const bufferLength = this.micAnalyser.frequencyBinCount;
-    const timeDomain = new Uint8Array(bufferLength);
-    const freqData = new Uint8Array(bufferLength);
 
-    this.micAnalyser.getByteTimeDomainData(timeDomain);
-    this.micAnalyser.getByteFrequencyData(freqData);
+    // Reuse typed arrays to avoid garbage collection pressure in requestAnimationFrame loop
+    if (!this.cachedTimeDomain || this.cachedTimeDomain.length !== bufferLength) {
+      this.cachedTimeDomain = new Uint8Array(bufferLength);
+      this.cachedFreqData = new Uint8Array(bufferLength);
+    }
+
+    const timeDomain = this.cachedTimeDomain!;
+    const freqData = this.cachedFreqData!;
+
+    this.micAnalyser.getByteTimeDomainData(timeDomain as unknown as Uint8Array<ArrayBuffer>);
+    this.micAnalyser.getByteFrequencyData(freqData as unknown as Uint8Array<ArrayBuffer>);
 
     // Compute RMS and peak
     let sumSquares = 0;
