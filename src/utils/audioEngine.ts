@@ -67,7 +67,7 @@ export class AudioEngine {
 
       return true;
     } catch (err) {
-      console.warn('Microphone access error:', err);
+      console.warn('Microphone access error:', err instanceof Error ? err.message : 'Unknown error');
       return false;
     }
   }
