@@ -246,7 +246,8 @@ export const AudioStressTest: React.FC = () => {
                 step="0.05"
                 value={competingVol}
                 onChange={(e) => handleCompetingVolChange(parseFloat(e.target.value))}
-                className="w-full accent-indigo-500"
+                aria-label="Stream Volume"
+                className="w-full accent-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-900 rounded-full"
               />
               <span className="text-xs font-mono text-slate-300 w-10 text-right">
                 {Math.round(competingVol * 100)}%
@@ -275,7 +276,8 @@ export const AudioStressTest: React.FC = () => {
                 value={loopbackVol}
                 onChange={(e) => handleLoopbackVolChange(parseFloat(e.target.value))}
                 disabled={!isMicActive}
-                className="w-full accent-emerald-500 disabled:opacity-40"
+                aria-label="Mic Sidetone Monitor Volume"
+                className="w-full accent-emerald-500 disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-900 rounded-full"
               />
               {loopbackVol === 0 ? (
                 <VolumeX className="w-4 h-4 text-slate-500 shrink-0" />
