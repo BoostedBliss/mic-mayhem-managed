@@ -1,0 +1,3 @@
+## 2023-11-02 - React State Updates in RequestAnimationFrame
+**Learning:** Calling React state setters (like `setMetrics`) inside a `requestAnimationFrame` loop that drives a `<canvas>` causes the entire component to re-render at 60fps. This is highly inefficient because React DOM diffing isn't needed for canvas updates, causing CPU bloat for no visual benefit to the DOM itself.
+**Action:** Always decouple high-frequency imperative render loops (canvas/WebGL) from React state updates. Use throttling on the React state setters (e.g., updating metrics 10 times a second) while letting the canvas draw function run at the full frame rate using local non-React variables.
