@@ -61,10 +61,20 @@ export const AudioStressTest: React.FC = () => {
 
   // Poll metrics and render canvas
   useEffect(() => {
-    const updateLoop = () => {
+    // ⚡ Bolt: Added ref to track the last metrics update time
+    let lastMetricsUpdateTime = 0;
+
+    const updateLoop = (time: number) => {
       if (isMicActive) {
         const m = audioEngine.getMetrics();
-        setMetrics(m);
+
+        // ⚡ Bolt: Throttle React state updates (setMetrics) to 10fps (every 100ms)
+        // to prevent expensive full-component re-renders at 60fps,
+        // while allowing the canvas to continue drawing at 60fps for smooth visuals.
+        if (time - lastMetricsUpdateTime >= 100) {
+          setMetrics(m);
+          lastMetricsUpdateTime = time;
+        }
 
         // Draw frequency bars
         const canvas = canvasRef.current;
