@@ -37,27 +37,27 @@ export const DiscordChecklist: React.FC = () => {
         {DISCORD_GOLDEN_RULES.map((rule) => {
           const isChecked = checkedIds.includes(rule.id);
           return (
-            <div
+            <button
               key={rule.id}
               onClick={() => toggleCheck(rule.id)}
-              className={`p-3.5 rounded-lg border cursor-pointer transition-all flex items-start gap-3.5 ${
+              aria-pressed={isChecked}
+              className={`w-full text-left p-3.5 rounded-lg border cursor-pointer transition-all flex items-start gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
                 isChecked
                   ? 'border-emerald-500/50 bg-emerald-950/20'
                   : 'border-slate-800 bg-slate-800/40 hover:bg-slate-800/80'
               }`}
             >
-              <button
-                type="button"
+              <div
                 id={`check-rule-${rule.id}`}
-                className="mt-0.5 text-slate-400 hover:text-slate-200"
-                aria-label={`Toggle ${rule.title}`}
+                className="mt-0.5 text-slate-400"
+                aria-hidden="true"
               >
                 {isChecked ? (
                   <CheckSquare className="w-5 h-5 text-emerald-400" />
                 ) : (
                   <Square className="w-5 h-5 text-slate-500" />
                 )}
-              </button>
+              </div>
 
               <div className="flex-1 text-xs">
                 <div className="flex items-center justify-between gap-2 mb-1">
@@ -78,7 +78,7 @@ export const DiscordChecklist: React.FC = () => {
                 </div>
                 <p className="text-slate-400 leading-relaxed">{rule.description}</p>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
