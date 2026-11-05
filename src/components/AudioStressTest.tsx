@@ -237,7 +237,7 @@ export const AudioStressTest: React.FC = () => {
 
           {competingType !== 'none' && (
             <div className="p-3 bg-slate-800/40 rounded-lg border border-slate-700/60 flex items-center gap-3">
-              <span className="text-xs text-slate-400 shrink-0">Stream Volume:</span>
+              <label htmlFor="input-competing-vol" className="text-xs text-slate-400 shrink-0">Stream Volume:</label>
               <input
                 id="input-competing-vol"
                 type="range"
@@ -259,7 +259,7 @@ export const AudioStressTest: React.FC = () => {
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <Headphones className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</span>
+                <label htmlFor="input-loopback-vol" className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</label>
               </div>
               <span className="text-[11px] text-slate-400 font-mono">
                 {loopbackVol === 0 ? 'Muted' : `${Math.round(loopbackVol * 100)}%`}

@@ -114,7 +114,7 @@ export const HardwareWizard: React.FC = () => {
       {/* 2. Select Bluetooth Headphone (Top 15 USA) */}
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <label htmlFor="select-headphone" className="text-xs font-semibold uppercase tracking-wider text-slate-400">
             Step 2: Select Your Bluetooth Headphones (Top 15 in USA)
           </label>
           <span className="text-[11px] text-slate-400">Ranked by US Market Popularity</span>
