@@ -50,6 +50,7 @@ export const HardwareWizard: React.FC = () => {
             const isSelected = platform.id === selectedPlatformId;
             return (
               <button
+                type="button"
                 key={platform.id}
                 id={`btn-platform-${platform.id}`}
                 onClick={() => setSelectedPlatformId(platform.id)}
@@ -88,6 +89,7 @@ export const HardwareWizard: React.FC = () => {
               const isSelected = phone.id === selectedMobileId;
               return (
                 <button
+                  type="button"
                   key={phone.id}
                   id={`btn-phone-${phone.id}`}
                   onClick={() => setSelectedMobileId(phone.id)}
