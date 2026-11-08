@@ -65,6 +65,11 @@ export const DiscordChecklist: React.FC = () => {
                   : 'border-slate-800 bg-slate-800/40 hover:bg-slate-800/80'
               }`}
             >
+              <button type="button"
+                id={`check-rule-${rule.id}`}
+                className="mt-0.5 text-slate-400 hover:text-slate-200"
+                aria-label={`Toggle ${rule.title}`}
+              >
               <div className="mt-0.5 text-slate-400 shrink-0">
                 {isChecked ? (
                   <CheckSquare className="w-5 h-5 text-emerald-400" />
