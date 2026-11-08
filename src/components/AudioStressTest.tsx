@@ -267,6 +267,8 @@ export const AudioStressTest: React.FC = () => {
             <div className="flex items-center justify-between mb-2">
               <label htmlFor="input-loopback-vol" className="flex items-center gap-2 cursor-pointer">
                 <Headphones className="w-4 h-4 text-emerald-400" />
+                <label htmlFor="input-loopback-vol" className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</label>
+              </div>
                 <span className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</span>
               </label>
               <span className="text-[11px] text-slate-400 font-mono">
