@@ -28,36 +28,50 @@ export const DiscordChecklist: React.FC = () => {
           </p>
         </div>
 
-        <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-slate-800 text-indigo-300 self-start sm:self-center border border-slate-700">
-          {checkedIds.length} of {DISCORD_GOLDEN_RULES.length} Completed
-        </span>
+        <div className="w-full sm:w-48 self-start sm:self-center space-y-1">
+          <div className="flex justify-between text-[11px] font-medium text-slate-400">
+            <span>Progress</span>
+            <span className="text-indigo-300 font-mono">{checkedIds.length} / {DISCORD_GOLDEN_RULES.length}</span>
+          </div>
+          <div
+            className="h-2 w-full bg-slate-800 rounded-full overflow-hidden border border-slate-700"
+            role="progressbar"
+            aria-valuenow={checkedIds.length}
+            aria-valuemin={0}
+            aria-valuemax={DISCORD_GOLDEN_RULES.length}
+          >
+            <div
+              className="h-full bg-emerald-500 transition-all duration-500 ease-out"
+              style={{ width: `${(checkedIds.length / DISCORD_GOLDEN_RULES.length) * 100}%` }}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="space-y-3">
         {DISCORD_GOLDEN_RULES.map((rule) => {
           const isChecked = checkedIds.includes(rule.id);
           return (
-            <div
+            <button
+              type="button"
+              role="checkbox"
+              aria-checked={isChecked}
+              id={`check-rule-${rule.id}`}
               key={rule.id}
               onClick={() => toggleCheck(rule.id)}
-              className={`p-3.5 rounded-lg border cursor-pointer transition-all flex items-start gap-3.5 ${
+              className={`w-full text-left p-3.5 rounded-lg border transition-all flex items-start gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
                 isChecked
                   ? 'border-emerald-500/50 bg-emerald-950/20'
                   : 'border-slate-800 bg-slate-800/40 hover:bg-slate-800/80'
               }`}
             >
-              <button
-                type="button"
-                id={`check-rule-${rule.id}`}
-                className="mt-0.5 text-slate-400 hover:text-slate-200"
-                aria-label={`Toggle ${rule.title}`}
-              >
+              <div className="mt-0.5 text-slate-400 shrink-0">
                 {isChecked ? (
                   <CheckSquare className="w-5 h-5 text-emerald-400" />
                 ) : (
                   <Square className="w-5 h-5 text-slate-500" />
                 )}
-              </button>
+              </div>
 
               <div className="flex-1 text-xs">
                 <div className="flex items-center justify-between gap-2 mb-1">
@@ -78,7 +92,7 @@ export const DiscordChecklist: React.FC = () => {
                 </div>
                 <p className="text-slate-400 leading-relaxed">{rule.description}</p>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
