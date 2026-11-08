@@ -61,10 +61,18 @@ export const AudioStressTest: React.FC = () => {
 
   // Poll metrics and render canvas
   useEffect(() => {
-    const updateLoop = () => {
+    let lastRenderTime = 0;
+    const renderInterval = 100; // 100ms throttle
+
+    const updateLoop = (timestamp: DOMHighResTimeStamp) => {
       if (isMicActive) {
         const m = audioEngine.getMetrics();
-        setMetrics(m);
+
+        // Throttle React state updates to avoid rendering 60 times a second
+        if (timestamp - lastRenderTime >= renderInterval) {
+          setMetrics(m);
+          lastRenderTime = timestamp;
+        }
 
         // Draw frequency bars
         const canvas = canvasRef.current;
@@ -257,10 +265,12 @@ export const AudioStressTest: React.FC = () => {
           {/* Sidetone / Loopback monitor */}
           <div className="p-3.5 bg-slate-800/30 rounded-lg border border-slate-800">
             <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
+              <label htmlFor="input-loopback-vol" className="flex items-center gap-2 cursor-pointer">
                 <Headphones className="w-4 h-4 text-emerald-400" />
                 <label htmlFor="input-loopback-vol" className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</label>
               </div>
+                <span className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</span>
+              </label>
               <span className="text-[11px] text-slate-400 font-mono">
                 {loopbackVol === 0 ? 'Muted' : `${Math.round(loopbackVol * 100)}%`}
               </span>
