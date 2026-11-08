@@ -49,7 +49,7 @@ export const HardwareWizard: React.FC = () => {
           {PLATFORMS.map((platform) => {
             const isSelected = platform.id === selectedPlatformId;
             return (
-              <button
+              <button type="button"
                 key={platform.id}
                 id={`btn-platform-${platform.id}`}
                 onClick={() => setSelectedPlatformId(platform.id)}
@@ -87,7 +87,7 @@ export const HardwareWizard: React.FC = () => {
             ).map((phone) => {
               const isSelected = phone.id === selectedMobileId;
               return (
-                <button
+                <button type="button"
                   key={phone.id}
                   id={`btn-phone-${phone.id}`}
                   onClick={() => setSelectedMobileId(phone.id)}

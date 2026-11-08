@@ -134,7 +134,7 @@ export const AudioStressTest: React.FC = () => {
           </p>
         </div>
 
-        <button
+        <button type="button"
           id="btn-toggle-mic"
           onClick={handleToggleMic}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors shrink-0 ${
@@ -168,7 +168,7 @@ export const AudioStressTest: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-            <button
+            <button type="button"
               id="btn-competing-chatter"
               onClick={() => handleSelectSound('discord_chatter')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
@@ -190,7 +190,7 @@ export const AudioStressTest: React.FC = () => {
               </p>
             </button>
 
-            <button
+            <button type="button"
               id="btn-competing-lofi"
               onClick={() => handleSelectSound('stream_lofi')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
@@ -212,7 +212,7 @@ export const AudioStressTest: React.FC = () => {
               </p>
             </button>
 
-            <button
+            <button type="button"
               id="btn-competing-game"
               onClick={() => handleSelectSound('gaming_rumble')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
