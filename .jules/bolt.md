@@ -1,3 +1,3 @@
-## 2026-11-05 - Throttling React State in RAF Canvas Loops
-**Learning:** When a component mixes high-frequency canvas drawing (60 FPS via `requestAnimationFrame`) with React state updates (like updating text metrics), updating React state on every frame causes massive unnecessary re-renders of the entire component tree.
-**Action:** Always decouple visual canvas updates from React state updates in RAF loops. Throttle React `setState` calls (e.g., to 10 FPS) using a timestamp closure while allowing canvas contexts to continue drawing at full frame rate.
+## 2024-11-04 - React state updates in requestAnimationFrame loops
+**Learning:** State updates (`setMetrics`) inside a `requestAnimationFrame` loop cause React to re-render the component at 60fps, severely degrading performance.
+**Action:** Decouple React state updates from canvas drawing updates in `requestAnimationFrame` by throttling the state update (e.g. tracking `timestamp` against a `useRef`). Canvas can remain 60fps while state updates are limited to 10fps.
