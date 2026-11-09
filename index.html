@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 🛡️ Sentinel Security Enhancement: Content Security Policy (CSP) added to mitigate Cross-Site Scripting (XSS) and data exfiltration. Allowing blob: and data: for audio engine processing. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' wss: https:; media-src 'self' data: blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
     <title>Discord Audio Setup &amp; Infallible Mic Optimizer</title>
     <meta name="description" content="Interactive audio diagnostics and Bluetooth HFP vs A2DP stress-tester for Discord voice across Windows 11, macOS, mobile phones, and top headphones." />
     <meta property="og:title" content="Discord Audio Setup &amp; Infallible Mic Optimizer" />
