@@ -142,6 +142,8 @@ export const AudioStressTest: React.FC = () => {
           </p>
         </div>
 
+        <button
+          type="button"
         <button type="button"
           id="btn-toggle-mic"
           onClick={handleToggleMic}
@@ -176,6 +178,8 @@ export const AudioStressTest: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <button
+              type="button"
             <button type="button"
               id="btn-competing-chatter"
               onClick={() => handleSelectSound('discord_chatter')}
@@ -198,6 +202,8 @@ export const AudioStressTest: React.FC = () => {
               </p>
             </button>
 
+            <button
+              type="button"
             <button type="button"
               id="btn-competing-lofi"
               onClick={() => handleSelectSound('stream_lofi')}
@@ -220,6 +226,8 @@ export const AudioStressTest: React.FC = () => {
               </p>
             </button>
 
+            <button
+              type="button"
             <button type="button"
               id="btn-competing-game"
               onClick={() => handleSelectSound('gaming_rumble')}
@@ -248,6 +256,7 @@ export const AudioStressTest: React.FC = () => {
               <label htmlFor="input-competing-vol" className="text-xs text-slate-400 shrink-0">Stream Volume:</label>
               <input
                 id="input-competing-vol"
+                aria-label="Stream Volume"
                 type="range"
                 min="0.05"
                 max="1"
@@ -278,6 +287,7 @@ export const AudioStressTest: React.FC = () => {
             <div className="flex items-center gap-3">
               <input
                 id="input-loopback-vol"
+                aria-label="Hear Yourself (Mic Sidetone Monitor)"
                 type="range"
                 min="0"
                 max="1"

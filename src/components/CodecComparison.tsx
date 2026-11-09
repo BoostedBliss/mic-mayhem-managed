@@ -60,6 +60,8 @@ export const CodecComparison: React.FC = () => {
             Full-spectrum stereo audio. Rich deep bass, crisp highs, zero telephone distortion. This is what you hear when you only listen to YouTube, Spotify, or games without talking.
           </p>
 
+          <button
+            type="button"
           <button type="button"
             id="btn-play-a2dp-demo"
             onClick={() => handlePlayDemo('a2dp')}
@@ -96,6 +98,8 @@ export const CodecComparison: React.FC = () => {
             The instant Discord opens your Bluetooth microphone, Bluetooth radio bandwidth collapses. Bass disappears, game audio sounds tinny like an old 1990s telephone handset, and voice cuts out.
           </p>
 
+          <button
+            type="button"
           <button type="button"
             id="btn-play-hfp-demo"
             onClick={() => handlePlayDemo('hfp')}
