@@ -28,9 +28,24 @@ export const DiscordChecklist: React.FC = () => {
           </p>
         </div>
 
-        <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-slate-800 text-indigo-300 self-start sm:self-center border border-slate-700">
-          {checkedIds.length} of {DISCORD_GOLDEN_RULES.length} Completed
-        </span>
+        <div className="w-full sm:w-48 self-start sm:self-center space-y-1">
+          <div className="flex justify-between text-[11px] font-medium text-slate-400">
+            <span>Progress</span>
+            <span className="text-indigo-300 font-mono">{checkedIds.length} / {DISCORD_GOLDEN_RULES.length}</span>
+          </div>
+          <div
+            className="h-2 w-full bg-slate-800 rounded-full overflow-hidden border border-slate-700"
+            role="progressbar"
+            aria-valuenow={checkedIds.length}
+            aria-valuemin={0}
+            aria-valuemax={DISCORD_GOLDEN_RULES.length}
+          >
+            <div
+              className="h-full bg-emerald-500 transition-all duration-500 ease-out"
+              style={{ width: `${(checkedIds.length / DISCORD_GOLDEN_RULES.length) * 100}%` }}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="space-y-3">
@@ -52,6 +67,7 @@ export const DiscordChecklist: React.FC = () => {
                 className="mt-0.5 text-slate-400"
                 aria-hidden="true"
               >
+              <div className="mt-0.5 text-slate-400 shrink-0">
                 {isChecked ? (
                   <CheckSquare className="w-5 h-5 text-emerald-400" />
                 ) : (
