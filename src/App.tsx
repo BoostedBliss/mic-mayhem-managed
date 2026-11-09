@@ -42,7 +42,7 @@ export default function App() {
 
         {/* Navigation Tabs */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex gap-2 border-t border-slate-800/80 overflow-x-auto py-2">
-          <button
+          <button type="button"
             id="tab-stress-test"
             onClick={() => setActiveTab('stress')}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 ${
@@ -55,7 +55,7 @@ export default function App() {
             Live Audio Stress-Test
           </button>
 
-          <button
+          <button type="button"
             id="tab-codec-compare"
             onClick={() => setActiveTab('codec')}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 ${
@@ -68,7 +68,7 @@ export default function App() {
             Bluetooth HFP vs A2DP Demo
           </button>
 
-          <button
+          <button type="button"
             id="tab-hardware-wizard"
             onClick={() => setActiveTab('hardware')}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 ${
@@ -81,7 +81,7 @@ export default function App() {
             Platform &amp; Headphone Fixes
           </button>
 
-          <button
+          <button type="button"
             id="tab-discord-checklist"
             onClick={() => setActiveTab('checklist')}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 ${
