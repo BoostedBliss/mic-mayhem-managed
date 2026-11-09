@@ -20,6 +20,7 @@ export const AudioStressTest: React.FC = () => {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animFrameRef = useRef<number | null>(null);
+  const lastStateUpdateRef = useRef<number>(0);
 
   // Toggle Microphone
   const handleToggleMic = async () => {
