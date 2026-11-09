@@ -1,3 +1,3 @@
-## 2025-02-28 - Throttling React State Updates in requestAnimationFrame
-**Learning:** Mixing high-frequency canvas drawing (requestAnimationFrame) with React state updates causes excessive full-component re-renders, severely degrading performance.
-**Action:** Always decouple visual canvas updates from React state updates. Throttle React `setState` calls (e.g., using a timestamp closure inside the RAF loop) to ~10fps to prevent excessive re-renders while allowing the canvas to continue drawing at a full 60 FPS.
+## 2024-05-15 - Decouple Canvas from React State Updates
+**Learning:** Calling setState inside a requestAnimationFrame loop forces the entire React component to re-render 60 times a second, which causes significant CPU overhead.
+**Action:** Always decouple visual canvas updates from React state updates. Throttle React setState calls (using a timestamp closure) while letting the canvas continue drawing at a full 60 FPS.
