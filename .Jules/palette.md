@@ -1,3 +1,4 @@
-## 2024-11-06 - [Button Defaults]
-**Learning:** Found that refactoring accessibility `div`s to `<button>`s requires explicitly setting `type="button"` to avoid default form submission behaviors in React, and that keeping PR size constraints small means intentionally reverting lockfile updates (like `pnpm-lock.yaml`) during purely UX tasks.
-**Action:** Always add `type="button"` when creating semantic buttons, and explicitly discard lockfile changes when acting as Palette to adhere to the 50-line PR limit.
+
+## 2026-11-04 - [Checklist Accessibility]
+**Learning:** Avoid nested interactive elements (e.g., button inside a div wrapper with an onClick handler). Screen readers and keyboard navigation struggle with this pattern. Instead, use a semantic button for the full-card click target.
+**Action:** Always wrap the entire interactive card/item in a semantic button, change the inner checkmark icon to a decorative div with aria-hidden, and use aria-pressed for states like checked/unchecked.

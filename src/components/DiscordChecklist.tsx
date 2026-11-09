@@ -53,12 +53,10 @@ export const DiscordChecklist: React.FC = () => {
           const isChecked = checkedIds.includes(rule.id);
           return (
             <button
-              type="button"
               key={rule.id}
               onClick={() => toggleCheck(rule.id)}
-              role="checkbox"
-              aria-checked={isChecked}
-              className={`w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 p-3.5 rounded-lg border cursor-pointer transition-all flex items-start gap-3.5 ${
+              aria-pressed={isChecked}
+              className={`w-full text-left p-3.5 rounded-lg border cursor-pointer transition-all flex items-start gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
                 isChecked
                   ? 'border-emerald-500/50 bg-emerald-950/20'
                   : 'border-slate-800 bg-slate-800/40 hover:bg-slate-800/80'
@@ -66,7 +64,7 @@ export const DiscordChecklist: React.FC = () => {
             >
               <div
                 id={`check-rule-${rule.id}`}
-                className="mt-0.5 text-slate-400 hover:text-slate-200"
+                className="mt-0.5 text-slate-400"
                 aria-hidden="true"
               >
               <div className="mt-0.5 text-slate-400 shrink-0">
