@@ -20,6 +20,7 @@ export const AudioStressTest: React.FC = () => {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animFrameRef = useRef<number | null>(null);
+  const lastStateUpdateRef = useRef<number>(0);
 
   // Toggle Microphone
   const handleToggleMic = async () => {
@@ -61,10 +62,19 @@ export const AudioStressTest: React.FC = () => {
 
   // Poll metrics and render canvas
   useEffect(() => {
-    const updateLoop = () => {
+    let lastStateUpdate = 0;
+    const updateLoop = (time: number) => {
       if (isMicActive) {
         const m = audioEngine.getMetrics();
-        setMetrics(m);
+
+        // ⚡ Bolt Optimization:
+        // Throttle React state updates to ~10fps (every 100ms) to prevent expensive re-renders
+        // of the entire component tree, while keeping the canvas animation below at full 60fps.
+        if (time - lastStateUpdate > 100) {
+          setMetrics(m);
+          lastStateUpdate = time;
+        }
+
 
         // Draw frequency bars
         const canvas = canvasRef.current;
@@ -135,6 +145,8 @@ export const AudioStressTest: React.FC = () => {
         </div>
 
         <button
+          type="button"
+        <button type="button"
           id="btn-toggle-mic"
           onClick={handleToggleMic}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors shrink-0 ${
@@ -169,6 +181,8 @@ export const AudioStressTest: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
             <button
+              type="button"
+            <button type="button"
               id="btn-competing-chatter"
               onClick={() => handleSelectSound('discord_chatter')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
@@ -191,6 +205,8 @@ export const AudioStressTest: React.FC = () => {
             </button>
 
             <button
+              type="button"
+            <button type="button"
               id="btn-competing-lofi"
               onClick={() => handleSelectSound('stream_lofi')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
@@ -213,6 +229,8 @@ export const AudioStressTest: React.FC = () => {
             </button>
 
             <button
+              type="button"
+            <button type="button"
               id="btn-competing-game"
               onClick={() => handleSelectSound('gaming_rumble')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
@@ -237,9 +255,10 @@ export const AudioStressTest: React.FC = () => {
 
           {competingType !== 'none' && (
             <div className="p-3 bg-slate-800/40 rounded-lg border border-slate-700/60 flex items-center gap-3">
-              <span className="text-xs text-slate-400 shrink-0">Stream Volume:</span>
+              <label htmlFor="input-competing-vol" className="text-xs text-slate-400 shrink-0">Stream Volume:</label>
               <input
                 id="input-competing-vol"
+                aria-label="Stream Volume"
                 type="range"
                 min="0.05"
                 max="1"
@@ -257,10 +276,12 @@ export const AudioStressTest: React.FC = () => {
           {/* Sidetone / Loopback monitor */}
           <div className="p-3.5 bg-slate-800/30 rounded-lg border border-slate-800">
             <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
+              <label htmlFor="input-loopback-vol" className="flex items-center gap-2 cursor-pointer">
                 <Headphones className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</span>
+                <label htmlFor="input-loopback-vol" className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</label>
               </div>
+                <span className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</span>
+              </label>
               <span className="text-[11px] text-slate-400 font-mono">
                 {loopbackVol === 0 ? 'Muted' : `${Math.round(loopbackVol * 100)}%`}
               </span>
@@ -268,6 +289,7 @@ export const AudioStressTest: React.FC = () => {
             <div className="flex items-center gap-3">
               <input
                 id="input-loopback-vol"
+                aria-label="Hear Yourself (Mic Sidetone Monitor)"
                 type="range"
                 min="0"
                 max="1"
