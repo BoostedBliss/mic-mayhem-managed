@@ -45,7 +45,7 @@ export default function App() {
           <button type="button"
             id="tab-stress-test"
             onClick={() => setActiveTab('stress')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 ${
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
               activeTab === 'stress'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/30'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -58,7 +58,7 @@ export default function App() {
           <button type="button"
             id="tab-codec-compare"
             onClick={() => setActiveTab('codec')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 ${
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
               activeTab === 'codec'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/30'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -71,7 +71,7 @@ export default function App() {
           <button type="button"
             id="tab-hardware-wizard"
             onClick={() => setActiveTab('hardware')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 ${
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
               activeTab === 'hardware'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/30'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -84,7 +84,7 @@ export default function App() {
           <button type="button"
             id="tab-discord-checklist"
             onClick={() => setActiveTab('checklist')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 ${
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
               activeTab === 'checklist'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-900/30'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
