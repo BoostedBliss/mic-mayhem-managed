@@ -146,7 +146,6 @@ export const AudioStressTest: React.FC = () => {
 
         <button
           type="button"
-        <button type="button"
           id="btn-toggle-mic"
           onClick={handleToggleMic}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors shrink-0 ${
@@ -182,7 +181,6 @@ export const AudioStressTest: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
             <button
               type="button"
-            <button type="button"
               id="btn-competing-chatter"
               onClick={() => handleSelectSound('discord_chatter')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
@@ -206,7 +204,6 @@ export const AudioStressTest: React.FC = () => {
 
             <button
               type="button"
-            <button type="button"
               id="btn-competing-lofi"
               onClick={() => handleSelectSound('stream_lofi')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
@@ -230,7 +227,6 @@ export const AudioStressTest: React.FC = () => {
 
             <button
               type="button"
-            <button type="button"
               id="btn-competing-game"
               onClick={() => handleSelectSound('gaming_rumble')}
               className={`p-3 rounded-lg border text-left text-xs transition-all ${
@@ -278,8 +274,6 @@ export const AudioStressTest: React.FC = () => {
             <div className="flex items-center justify-between mb-2">
               <label htmlFor="input-loopback-vol" className="flex items-center gap-2 cursor-pointer">
                 <Headphones className="w-4 h-4 text-emerald-400" />
-                <label htmlFor="input-loopback-vol" className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</label>
-              </div>
                 <span className="text-xs font-medium text-slate-200">Hear Yourself (Mic Sidetone Monitor)</span>
               </label>
               <span className="text-[11px] text-slate-400 font-mono">

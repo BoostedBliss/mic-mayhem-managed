@@ -18,6 +18,10 @@ export class AudioEngine {
   private codecGain: GainNode | null = null;
   private isSimulatingHfp: boolean = false;
 
+  // Pre-allocated buffers for getMetrics to avoid GC pressure
+  private timeDomainBuffer: Uint8Array | null = null;
+  private freqDataBuffer: Uint8Array | null = null;
+
   // Metrics
   private currentMetrics: MicAnalysisMetrics = {
     currentDb: -100,
@@ -99,17 +103,22 @@ export class AudioEngine {
     }
 
     const bufferLength = this.micAnalyser.frequencyBinCount;
-    const timeDomain = new Uint8Array(bufferLength);
-    const freqData = new Uint8Array(bufferLength);
 
-    this.micAnalyser.getByteTimeDomainData(timeDomain);
-    this.micAnalyser.getByteFrequencyData(freqData);
+    // ⚡ Bolt Optimization: Reuse typed arrays to prevent continuous garbage collection
+    // inside high-frequency requestAnimationFrame/AnalyserNode update loops.
+    if (!this.timeDomainBuffer || this.timeDomainBuffer.length !== bufferLength) {
+      this.timeDomainBuffer = new Uint8Array(bufferLength);
+      this.freqDataBuffer = new Uint8Array(bufferLength);
+    }
+
+    this.micAnalyser.getByteTimeDomainData(this.timeDomainBuffer as any);
+    this.micAnalyser.getByteFrequencyData(this.freqDataBuffer as any);
 
     // Compute RMS and peak
     let sumSquares = 0;
     let peak = 0;
     for (let i = 0; i < bufferLength; i++) {
-      const normalized = (timeDomain[i] - 128) / 128;
+      const normalized = (this.timeDomainBuffer![i] - 128) / 128;
       const absVal = Math.abs(normalized);
       if (absVal > peak) peak = absVal;
       sumSquares += normalized * normalized;
@@ -128,7 +137,7 @@ export class AudioEngine {
       noiseFloorDb: isSpeaking ? this.currentMetrics.noiseFloorDb : Math.round(currentDb),
       isClipping,
       isSpeaking,
-      frequencyData: freqData.slice(0, 48)
+      frequencyData: this.freqDataBuffer!.slice(0, 48)
     };
 
     return this.currentMetrics;
