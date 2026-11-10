@@ -1,4 +1,3 @@
-## 2024-05-18 - React state updates inside requestAnimationFrame loops
-
-**Learning:** When using `requestAnimationFrame` for canvas updates, also triggering a React state update (`setMetrics`) every frame causes the entire component tree to re-render at 60fps. This leads to extremely high CPU usage and sluggishness, even if the state change is small, because React's reconciliation process runs 60 times a second.
-**Action:** Always decouple visual canvas updates from React state updates. If state must be updated during a `requestAnimationFrame` loop, throttle the state update (e.g., to 10fps using `time - lastStateUpdate > 100`) while letting the canvas render at full 60fps.
+## 2025-02-15 - Prevent Typed Array Allocations in High-Frequency Loops
+**Learning:** Instantiating new arrays (e.g., `new Uint8Array()`) inside a function called via `requestAnimationFrame` (like the Web Audio API `getMetrics` loop) causes a continuous stream of allocations. This creates excessive garbage collection pressure, leading to frame drops and jank on lower-end devices.
+**Action:** When pulling data from Web Audio `AnalyserNode` APIs (like `getByteTimeDomainData`), always pre-allocate the typed arrays in class state and reuse them. Only reallocate if the buffer length needs to change.

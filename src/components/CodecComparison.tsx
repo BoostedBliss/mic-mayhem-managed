@@ -62,7 +62,6 @@ export const CodecComparison: React.FC = () => {
 
           <button
             type="button"
-          <button type="button"
             id="btn-play-a2dp-demo"
             onClick={() => handlePlayDemo('a2dp')}
             className={`w-full py-2.5 px-4 rounded-lg font-medium text-xs flex items-center justify-center gap-2 transition-colors ${
@@ -100,7 +99,6 @@ export const CodecComparison: React.FC = () => {
 
           <button
             type="button"
-          <button type="button"
             id="btn-play-hfp-demo"
             onClick={() => handlePlayDemo('hfp')}
             className={`w-full py-2.5 px-4 rounded-lg font-medium text-xs flex items-center justify-center gap-2 transition-colors ${

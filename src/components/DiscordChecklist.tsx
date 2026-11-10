@@ -64,10 +64,9 @@ export const DiscordChecklist: React.FC = () => {
             >
               <div
                 id={`check-rule-${rule.id}`}
-                className="mt-0.5 text-slate-400"
+                className="mt-0.5 text-slate-400 shrink-0"
                 aria-hidden="true"
               >
-              <div className="mt-0.5 text-slate-400 shrink-0">
                 {isChecked ? (
                   <CheckSquare className="w-5 h-5 text-emerald-400" />
                 ) : (
